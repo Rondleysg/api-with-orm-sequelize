@@ -1,7 +1,7 @@
-import express from "express";
+const express = require("express");
+const routes = require("./routes");
 
 const app = express();
-app.use(express.json());
 
 const PORT = process.env.PORT || "3000";
 const HOSTNAME = "http://localhost";
@@ -14,12 +14,10 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get("/teste", (req, res) => {
-    res.status(200).send({ message: `Welcome` });
-});
+routes(app);
 
 app.listen(PORT, () => {
     console.log(`Server running successfully ${HOSTNAME}:${PORT}`);
 });
 
-export default app;
+module.exports = app;
